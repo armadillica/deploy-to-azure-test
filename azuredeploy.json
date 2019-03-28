@@ -65,7 +65,8 @@
     "vmName": "[concat(variables('scenarioPrefix'),'VM')]",
     "virtualNetworkName": "[concat(variables('scenarioPrefix'),'Vnet')]",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-    "networkSecurityGroupName": "[concat(variables('scenarioPrefix'),'NSG')]"
+    "networkSecurityGroupName": "[concat(variables('scenarioPrefix'),'NSG')]",
+    "storageAccountName": "[concat('storage', uniqueString(resourceGroup().id))]"
   },
   "resources": [
     {
@@ -226,6 +227,18 @@
           "commandToExecute": "[parameters('commandToExecute')]"
         }
       }
+    },
+    {
+      "comments": "Storage account used to store VM disks",
+      "apiVersion": "2018-07-01",
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('storageAccountName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "Storage",
+      "properties": {}
     }
   ]
 }
