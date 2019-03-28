@@ -55,6 +55,7 @@
     "virtualNetworkName": "[concat(variables('scenarioPrefix'),'Vnet')]",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
     "networkSecurityGroupName": "[concat(variables('scenarioPrefix'),'NSG')]",
+    "location": "[resourceGroup().location]",
     "storageAccountName": "flamencostorage"
   },
   "resources": [
@@ -62,7 +63,7 @@
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2017-06-01",
       "name": "[variables('networkSecurityGroupName')]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "properties": {
         "securityRules": [
           {
@@ -86,7 +87,7 @@
       "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('publicIPAddressName')]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
         "dnsSettings": {
@@ -98,7 +99,7 @@
       "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[variables('virtualNetworkName')]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -122,7 +123,7 @@
       "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicName')]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
@@ -149,7 +150,7 @@
       "apiVersion": "2018-06-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('vmName')]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
       ],
@@ -200,7 +201,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(variables('vmName'),'/installcustomscript')]",
       "apiVersion": "2018-06-01",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
       ],
@@ -222,7 +223,7 @@
       "apiVersion": "2018-07-01",
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('storageAccountName')]",
-      "location": "[resourceGroup().location]",
+      "location": "[variables('location')]",
       "sku": {
         "name": "Standard_LRS"
       },
