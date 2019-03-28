@@ -55,7 +55,7 @@
     "virtualNetworkName": "[concat(variables('scenarioPrefix'),'Vnet')]",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
     "networkSecurityGroupName": "[concat(variables('scenarioPrefix'),'NSG')]",
-    "storageAccountName": "flamencoStorage"
+    "storageAccountName": "flamencostorage"
   },
   "resources": [
     {
