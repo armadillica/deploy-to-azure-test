@@ -11,6 +11,18 @@
         "description": "Size of vm"
       }
     },
+    "storageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Storage account name for Azure file share."
+      }
+    },
+    "storageAccountKey": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Storage account key for Azure file share."
+      }
+    },
     "username": {
       "type": "string",
       "defaultValue": "sybren",
